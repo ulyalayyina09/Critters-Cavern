@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Critter's Cavern.sln"
+    "dotnet.defaultSolution": "Critter's Cavern (1).sln"
 }
