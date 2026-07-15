@@ -10,6 +10,10 @@ public class Health : MonoBehaviour
 
     [SerializeField] private Slider healthBar;
 
+    [Header("Score")]
+    [Tooltip("Points awarded to the score when this dies. Leave at 0 for the player.")]
+    [SerializeField] private int scoreValue = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,11 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        if (scoreValue > 0 && GameManager.Instance != null)
+        {
+            GameManager.Instance.AddScore(scoreValue);
+        }
+
         gameObject.SetActive(false);
     }
 }

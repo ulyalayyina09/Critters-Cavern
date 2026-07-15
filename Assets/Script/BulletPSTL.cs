@@ -4,6 +4,7 @@ public class BulletPSTL : MonoBehaviour
 {
     public float speed = 20f;
     public float lifeTime = 3f;
+    public int damage = 10;
 
     void Start()
     {
@@ -19,10 +20,15 @@ public class BulletPSTL : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // This is where you will handle hitting enemies later!
-        // if (collision.CompareTag("Environment")) // Make sure your tilemap/walls have the "Environment" tag
-        //{
-        //    Destroy(gameObject);
-        //}
+        if (collision.CompareTag("Enemy"))
+        {
+            Health enemyHealth = collision.GetComponent<Health>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(damage);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
