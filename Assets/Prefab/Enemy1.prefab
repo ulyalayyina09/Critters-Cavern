@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a338dbb6adb57fd49a4bfbc74d60ecb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1
   chaseRadius: 25
 --- !u!1 &2637249874370711615
 GameObject:
