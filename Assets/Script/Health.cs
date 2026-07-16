@@ -5,14 +5,10 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
+    public int maxHealth = 100;
+    public int currentHealth;
 
-    [SerializeField] private Slider healthBar;
-
-    [Header("Score")]
-    [Tooltip("Points awarded to the score when this dies. Leave at 0 for the player.")]
-    [SerializeField] private int scoreValue = 0;
+    public Slider healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +37,19 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        if (scoreValue > 0 && GameManager.Instance != null)
+        if (CompareTag("Player"))
+    {
+        // Panggil fungsi yang baru kita buat tadi
+        GameManager.Instance.PlayerDied(); 
+    }
+    else if (CompareTag("Enemy"))
+    {
+        // TAMBAHKAN INI: Jika yang mati Enemy, tambah skor (misal: 10 poin)
+        if (GameManager.Instance != null)
         {
-            GameManager.Instance.AddScore(scoreValue);
+            GameManager.Instance.AddScore(10); 
         }
-
-        gameObject.SetActive(false);
+    }
+        Destroy(gameObject);
     }
 }

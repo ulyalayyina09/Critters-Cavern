@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     private float timeRemaining;
     private bool timerRunning = true;
 
+    [SerializeField] private GameObject endScreenPanel;
+    [SerializeField] private TMPro.TextMeshProUGUI finalScoreText;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -73,5 +76,34 @@ public class GameManager : MonoBehaviour
     private void TimeUp()
     {
         Debug.Log("Time's up!");
+        timerRunning = false; // Hentikan timer kamu
+        Time.timeScale = 0f;  // Bekukan pergerakan game
+        
+        if (endScreenPanel != null)
+        {
+            FinalScore();
+            endScreenPanel.SetActive(true); // Munculin panel Game Over di Unity
+        }
+    }
+
+    public void PlayerDied()
+    {
+        timerRunning = false; // Hentikan timer kamu
+        Time.timeScale = 0f;  // Bekukan pergerakan game
+        
+        if (endScreenPanel != null)
+        {
+            FinalScore();
+            endScreenPanel.SetActive(true); // Munculin panel Game Over di Unity
+        }
+        
+    }
+
+    public void FinalScore()
+    {
+        if (finalScoreText != null)
+        {
+            finalScoreText.text = score.ToString();
+        }
     }
 }

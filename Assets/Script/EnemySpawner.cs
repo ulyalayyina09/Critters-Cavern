@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Masukkan Prefab Enemy ke slot ini di Inspector nanti
-    public GameObject enemyPrefab; 
+    [SerializeField] private GameObject enemyPrefab; 
 
-    // Waktu jeda antar spawn (dalam detik)
-    public float spawnInterval = 3f; 
+    [SerializeField] private float spawnInterval = 3f; 
     private float timer;
+    [SerializeField] private int maxEnemies = 10;
 
-    // Titik lokasi spawn (bisa diisi beberapa titik di map)
-    public Transform[] spawnPoints; 
+    [SerializeField] private Transform[] spawnPoints; 
 
     void Start()
     {
@@ -23,7 +21,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (timer <= 0f)
         {
-            SpawnEnemy();
+            if (GetCurrentEnemyCount() < maxEnemies)
+            {
+                SpawnEnemy();
+            }
             timer = spawnInterval; // Reset timer
         }
     }
@@ -38,5 +39,10 @@ public class EnemySpawner : MonoBehaviour
 
         // Gandakan prefab enemy di posisi yang terpilih
         Instantiate(enemyPrefab, selectedPoint.position, selectedPoint.rotation);
+    }
+
+    int GetCurrentEnemyCount()
+    {
+        return GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 }
